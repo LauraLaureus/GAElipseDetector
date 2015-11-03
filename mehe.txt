@@ -1,0 +1,36 @@
+
+    %rest = 0; %elements in pairs
+    availables = ones(1,pop_size);
+    pairing_table = zeros(round(pop_size/2),2);
+    
+    %if number of ancestors is odd, one of them crosses twice
+    if mod(pop_size,2) ~= 0
+        availables(randi(pop_size)) = 2;
+    end
+    
+    %while rest <= pop_size
+    for i=1:size(availables,2)
+        while availables(i) > 0
+            %Obtener un número aleatorio.
+            picked = randi(size(pairing_table,1)*size(pairing_table,2));
+            if pairing_table(picked) == 0
+                pairing_table(picked) = i;
+                availables(i) = availables(i)-1;
+            else
+                for j=1:size(pairing_table,1)*size(pairing_table,2)
+                    if pairing_table(mod(picked+j,size(pairing_table,1)*size(pairing_table,2))+1) == 0
+                        pairing_table(mod(picked+j,size(pairing_table,1)*size(pairing_table,2))+1) = i;
+                        availables(i) = availables(i)-1;
+                    end
+                end
+            end
+        end 
+    end
+    
+     %Comprobar que está disponible.
+        %if availables(picked) > 0
+            %si está disponible entonces añadirlo a la tabla, poner su
+            %disponibilidad a 0 e incrementar rest.
+            %pairing_table(rest+1) = picked;
+            %availables(picked) = availables(picked) - 1;
+            %rest = rest + 1;
