@@ -35,8 +35,8 @@ function main(p_mutation,pop_size,num_iter)
         subplot(1,3,3);
         hold on;
         imshow(BW);
-        elipse = getPointsForElipse(elite(1,:));
-        plot (elipse(:,1),elipse(:,2));
+        elipse = getPointsForElipse(elite(2,:));
+        plot (elipse(:,1),elipse(:,2),'r');
         hold off;
     end
 end
